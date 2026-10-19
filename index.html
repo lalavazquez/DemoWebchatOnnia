@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="onnia-favicon.ico">
   
   <style>
     :root {
@@ -84,14 +85,11 @@
       gap: 12px;
       text-decoration: none;
       color: var(--text-main);
-      font-weight: 800;
-      font-size: 24px;
-      letter-spacing: -0.5px;
     }
 
     .logo svg {
-      width: 136px;
-      height: 136px;
+      width: 140px;
+      height: auto;
     }
 
     .nav-links {
@@ -249,7 +247,7 @@
       font-size: 15px;
     }
 
-    /* Testing Banner Section (Scroll Filler) */
+    /* Testing Banner Section */
     .test-section {
       background: linear-gradient(180deg, rgba(10, 4, 42, 0) 0%, rgba(82, 76, 252, 0.08) 50%, rgba(10, 4, 42, 0) 100%);
       padding: 100px 0;
@@ -326,43 +324,6 @@
       background: var(--brand-secondary);
     }
 
-    /* FAQ / Pricing Section (More scroll height) */
-    .scroll-section {
-      padding: 80px 0;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 36px;
-      margin-bottom: 48px;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .pricing-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 20px;
-      padding: 36px;
-      text-align: center;
-      position: relative;
-    }
-
-    .pricing-card.featured {
-      border-color: var(--brand-primary);
-      box-shadow: var(--brand-glow);
-    }
-
-    .pricing-card .price {
-      font-size: 42px;
-      font-weight: 800;
-      margin: 16px 0;
-    }
-
     /* Footer */
     footer {
       border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -377,11 +338,11 @@
       position: fixed;
       bottom: 24px;
       left: 24px;
-      z-index: 9999;
+      z-index: 99999;
     }
 
     .config-btn {
-      background: rgba(18, 10, 58, 0.9);
+      background: rgba(18, 10, 58, 0.95);
       border: 1px solid var(--brand-primary);
       color: #fff;
       padding: 10px 16px;
@@ -406,7 +367,7 @@
       border: 1px solid var(--brand-primary);
       border-radius: 16px;
       padding: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
     }
 
     .config-panel.open {
@@ -418,21 +379,7 @@
       font-size: 15px;
     }
 
-    .config-panel textarea {
-      width: 100%;
-      height: 90px;
-      background: rgba(0,0,0,0.4);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #a39bbd;
-      border-radius: 8px;
-      padding: 8px;
-      font-family: monospace;
-      font-size: 11px;
-      resize: vertical;
-      margin-bottom: 12px;
-    }
-
-    .config-panel input {
+    .config-panel textarea, .config-panel input {
       width: 100%;
       background: rgba(0,0,0,0.4);
       border: 1px solid rgba(255,255,255,0.1);
@@ -443,15 +390,30 @@
       margin-bottom: 12px;
     }
 
+    .config-panel textarea {
+      height: 70px;
+      font-family: monospace;
+      font-size: 11px;
+      resize: vertical;
+      color: #a39bbd;
+    }
+
     .config-panel button {
       width: 100%;
-      padding: 8px;
+      padding: 9px;
       background: var(--brand-gradient);
       border: none;
       color: #fff;
       border-radius: 8px;
       font-weight: 600;
       cursor: pointer;
+      margin-bottom: 6px;
+    }
+
+    .config-panel button.btn-reset {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--text-muted);
     }
   </style>
 </head>
@@ -465,7 +427,7 @@
     <nav>
       <a href="#" class="logo">
         <!-- SVG Logo de ONNIA -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="302.645mm" height="86.2094mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 51563.93 14688.16" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="302.645mm" height="86.2094mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 51563.93 14688.16" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
  <defs>
   <style type="text/css"><![CDATA[
     .fil8 {fill:white !important;fill-rule:nonzero}
@@ -531,7 +493,6 @@
   <polygon class="fil11" points="41833.63,3817.33 41833.63,10951.62 43449.93,10951.62 43449.93,3817.33 "/>
  </g>
 </svg>
-       
       </a>
       <ul class="nav-links">
         <li><a href="#features">Características</a></li>
@@ -556,25 +517,19 @@
     <!-- Features -->
     <section id="features" class="features-grid">
       <div class="card">
-        <div class="card-icon">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-        </div>
+        <div class="card-icon">⚡</div>
         <h3>Respuestas Ultrarrápidas</h3>
         <p>Integración en tiempo real con modelos LLM optimizados para brindar atención inmediata sin latencia.</p>
       </div>
 
       <div class="card">
-        <div class="card-icon">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m0 0v2m0-2h2m-2 0H10m11 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        </div>
+        <div class="card-icon">🔒</div>
         <h3>Seguridad Avanzada</h3>
         <p>Conexiones cifradas con tokens de validación dinámicos para proteger la información de tus clientes.</p>
       </div>
 
       <div class="card">
-        <div class="card-icon">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
-        </div>
+        <div class="card-icon">🎨</div>
         <h3>Widget Personalizable</h3>
         <p>Adapta los colores, logos y flujos del chat para coincidir 100% con la identidad visual de tu marca.</p>
       </div>
@@ -604,9 +559,6 @@
   </section>
 
   <div class="container">
-
-
-    <!-- Footer -->
     <footer>
       <p>© 2026 ONNIA AI. Entorno de desarrollo y pruebas de Webchat.</p>
     </footer>
@@ -618,33 +570,31 @@
       ⚙️ Configurar Widget Token
     </button>
     <div class="config-panel" id="configPanel">
-      <h4>Cambiar Token de Pruebas</h4>
-      <label style="font-size: 11px; color: var(--text-muted);">Token de ONNIA:</label>
-      <input type="text" id="tokenInput" placeholder="Pega solo el Token aquí..." />
-      
-      <label style="font-size: 11px; color: var(--text-muted);">O Script Completo:</label>
-      <textarea id="scriptInput" placeholder="<script src='...'></script>"></textarea>
+      <h4>Cambiar Token o Script</h4>
+      <label style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 4px;">Pega el token o el &lt;script&gt; completo:</label>
+      <textarea id="scriptInput" placeholder="<script src='https://widget.onnia.ai/onnia-widget.js?token=...'></script>"></textarea>
       
       <button onclick="saveAndApplyWidget()">Guardar y Aplicar</button>
+      <button class="btn-reset" onclick="resetToDefaultScript()">Restablecer Original</button>
     </div>
   </div>
 
-  <!-- Carga del Script del Widget Dynamically con Fallback al Script Base -->
-  <script id="onnia-widget-script">
-    (function() {
-      // Token Base por defecto
-      const DEFAULT_TOKEN = "v1.W-2YuxR9A8npVNc9CIVDmw5ZFKvmUrtgURrKJiprPfdJjeXvV43ZT9sU1usiHNhzZipFxZJS2FzJ0p_7Y9cW8jKqPFMzvACylifM2VdAzFQmxrXSDZwgJu5a6LSJrzRt0y6tLWerdwUlZ6XSAO38u6tBjO-G_ImrKlw394invh35BMTO7CL2FZvxaAQsPRuBVFsuU810QmsvNZQYe03L1Wxhh8ZCThgaqIgmje4oFDGOStXbbZvInXTv605S6HUBq91mRs6-KuZVVTpCKKndIoZqjz0k5RZ3rfmLIjNmIUdxgmn3hmmBgncz7oiR-VDPFcY6RgHlqsTlSVCne3TBhLUgD4yfq6dsRCaR2ZFym0Or_NGrm-ocNjJWMe0B3kJrnuItc5P5tGVYtOYq5d5bifAFn4nlmom3rCSAlsaVw1khXdMKJyltQ9uvEKGN7MttJfHIf6OM19bCPBjknhdZ83gf3MwfEGB7DqrNHPTEnUIxr08xuC0OZNxDOdZTJeXDCL1olboJ4Z08o2n-iqc-6n13iA";
-      
-      // Cargar del localStorage si existe
-      const savedToken = localStorage.getItem('onnia_widget_token') || DEFAULT_TOKEN;
-      
-      // Setear valores en los inputs del panel
-      document.getElementById('tokenInput').value = savedToken;
+  <!-- Carga del Widget Dinámica con Fallback al Script Base -->
+  <script>
+    const DEFAULT_SCRIPT_URL = "https://widget.onnia.ai/onnia-widget.js?token=v1.W-2YuxR9A8npVNc9CIVDmw5ZFKvmUrtgURrKJiprPfdJjeXvV43ZT9sU1usiHNhzZipFxZJS2FzJ0p_7Y9cW8jKqPFMzvACylifM2VdAzFQmxrXSDZwgJu5a6LSJrzRt0y6tLWerdwUlZ6XSAO38u6tBjO-G_ImrKlw394invh35BMTO7CL2FZvxaAQsPRuBVFsuU810QmsvNZQYe03L1Wxhh8ZCThgaqIgmje4oFDGOStXbbZvInXTv605S6HUBq91mRs6-KuZVVTpCKKndIoZqjz0k5RZ3rfmLIjNmIUdxgmn3hmmBgncz7oiR-VDPFcY6RgHlqsTlSVCne3TBhLUgD4yfq6dsRCaR2ZFym0Or_NGrm-ocNjJWMe0B3kJrnuItc5P5tGVYtOYq5d5bifAFn4nlmom3rCSAlsaVw1khXdMKJyltQ9uvEKGN7MttJfHIf6OM19bCPBjknhdZ83gf3MwfEGB7DqrNHPTEnUIxr08xuC0OZNxDOdZTJeXDCL1olboJ4Z08o2n-iqc-6n13iA";
 
-      // Inyectar el script
-      const script = document.createElement('script');
-      script.src = `https://widget.onnia.ai/onnia-widget.js?token=${savedToken}`;
-      document.body.appendChild(script);
+    // Al cargar, inyectar el script activo correspondiente
+    (function() {
+      const activeScriptUrl = localStorage.getItem('onnia_widget_url') || DEFAULT_SCRIPT_URL;
+      
+      // Mostrar en el textarea el valor actual
+      const textarea = document.getElementById('scriptInput');
+      if(textarea) textarea.value = activeScriptUrl;
+
+      // Crear e insertar la etiqueta script de forma dinámica
+      const scriptTag = document.createElement('script');
+      scriptTag.src = activeScriptUrl;
+      document.body.appendChild(scriptTag);
     })();
 
     function toggleConfig() {
@@ -653,24 +603,28 @@
     }
 
     function saveAndApplyWidget() {
-      const tokenInput = document.getElementById('tokenInput').value.trim();
-      const scriptInput = document.getElementById('scriptInput').value.trim();
-      let tokenToSave = tokenInput;
+      const rawInput = document.getElementById('scriptInput').value.trim();
+      let finalUrl = rawInput;
 
-      // Si pegó una etiqueta <script>, extraer el token de la URL
-      if (scriptInput.includes('token=')) {
-        const match = scriptInput.match(/token=([^"'\s>]+)/);
+      // Si el usuario pegó la etiqueta <script src="..."> completa, extraer de forma segura la URL del src
+      if (rawInput.includes('<script')) {
+        const match = rawInput.match(/src=["']([^"']+)["']/);
         if (match && match[1]) {
-          tokenToSave = match[1];
+          finalUrl = match[1];
         }
       }
 
-      if (tokenToSave) {
-        localStorage.setItem('onnia_widget_token', tokenToSave);
-        location.reload(); // Recargar para limpiar la instancia anterior del widget
+      if (finalUrl) {
+        localStorage.setItem('onnia_widget_url', finalUrl);
+        location.reload(); // Recarga para aplicar de inmediato el nuevo bot/widget
       } else {
-        alert("Por favor ingresa un Token o Script válido.");
+        alert("Por favor ingresa un script o URL válida.");
       }
+    }
+
+    function resetToDefaultScript() {
+      localStorage.removeItem('onnia_widget_url');
+      location.reload();
     }
   </script>
 </body>
