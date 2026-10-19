@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ONNIA - AI Chatbot Testing Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0a042a;
+      --bg-card: rgba(18, 10, 58, 0.6);
+      --border-card: rgba(162, 63, 253, 0.18);
+      --brand-primary: #a23ffd;
+      --brand-secondary: #524cfc;
+      --brand-tertiary: #7128fb;
+      --brand-gradient: linear-gradient(135deg, #a23ffd 0%, #524cfc 50%, #7128fb 100%);
+      --brand-glow: 0 0 30px rgba(162, 63, 253, 0.4);
+      --text-main: #f3f0ff;
+      --text-muted: #a39bbd;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Gradient Background Lights */
+    .bg-light-1 {
+      position: absolute;
+      top: -10vw;
+      left: -10vw;
+      width: 40vw;
+      height: 40vw;
+      background: radial-gradient(circle, rgba(162, 63, 253, 0.25) 0%, rgba(10, 4, 42, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-light-2 {
+      position: absolute;
+      top: 400px;
+      right: -10vw;
+      width: 45vw;
+      height: 45vw;
+      background: radial-gradient(circle, rgba(82, 76, 252, 0.2) 0%, rgba(10, 4, 42, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 800;
+      font-size: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    .logo svg {
+      width: 136px;
+      height: 136px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--brand-gradient);
+      color: #fff;
+      box-shadow: var(--brand-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(162, 63, 253, 0.6);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--brand-primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(162, 63, 253, 0.1);
+      border: 1px solid rgba(162, 63, 253, 0.3);
+      border-radius: 100px;
+      color: var(--brand-primary);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand-primary);
+      box-shadow: 0 0 10px var(--brand-primary);
+    }
+
+    h1 {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      letter-spacing: -1.5px;
+    }
+
+    .text-gradient {
+      background: var(--brand-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 60px;
+    }
+
+    /* Features Section */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin: 80px 0;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 32px;
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(162, 63, 253, 0.4);
+    }
+
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(162, 63, 253, 0.2), rgba(82, 76, 252, 0.2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--brand-primary);
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    /* Testing Banner Section (Scroll Filler) */
+    .test-section {
+      background: linear-gradient(180deg, rgba(10, 4, 42, 0) 0%, rgba(82, 76, 252, 0.08) 50%, rgba(10, 4, 42, 0) 100%);
+      padding: 100px 0;
+      margin: 60px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .test-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .test-text {
+      max-width: 500px;
+    }
+
+    .test-text h2 {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+
+    .test-text p {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .mock-chat-preview {
+      width: 100%;
+      max-width: 450px;
+      background: rgba(15, 8, 48, 0.9);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 16px;
+    }
+
+    .chat-status {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+
+    .chat-msg {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      max-width: 85%;
+    }
+
+    .chat-msg.bot {
+      border-top-left-radius: 2px;
+      background: rgba(162, 63, 253, 0.15);
+      border: 1px solid rgba(162, 63, 253, 0.2);
+    }
+
+    .chat-msg.user {
+      margin-left: auto;
+      border-top-right-radius: 2px;
+      background: var(--brand-secondary);
+    }
+
+    /* FAQ / Pricing Section (More scroll height) */
+    .scroll-section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 48px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 36px;
+      text-align: center;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--brand-primary);
+      box-shadow: var(--brand-glow);
+    }
+
+    .pricing-card .price {
+      font-size: 42px;
+      font-weight: 800;
+      margin: 16px 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Configurator Floating Panel */
+    .config-floating {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 9999;
+    }
+
+    .config-btn {
+      background: rgba(18, 10, 58, 0.9);
+      border: 1px solid var(--brand-primary);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    .config-panel {
+      display: none;
+      position: absolute;
+      bottom: 50px;
+      left: 0;
+      width: 320px;
+      background: #0f0736;
+      border: 1px solid var(--brand-primary);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+
+    .config-panel.open {
+      display: block;
+    }
+
+    .config-panel h4 {
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    .config-panel textarea {
+      width: 100%;
+      height: 90px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #a39bbd;
+      border-radius: 8px;
+      padding: 8px;
+      font-family: monospace;
+      font-size: 11px;
+      resize: vertical;
+      margin-bottom: 12px;
+    }
+
+    .config-panel input {
+      width: 100%;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .config-panel button {
+      width: 100%;
+      padding: 8px;
+      background: var(--brand-gradient);
+      border: none;
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-light-1"></div>
+  <div class="bg-light-2"></div>
+
+  <div class="container">
+    <!-- Navbar -->
+    <nav>
+      <a href="#" class="logo">
+        <!-- SVG Logo de ONNIA -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="302.645mm" height="86.2094mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 51563.93 14688.16" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css"><![CDATA[
+    .fil8 {fill:white !important;fill-rule:nonzero}
+    .fil1 {fill:url(#id0)}
+    .fil6 {fill:url(#id1)}
+    .fil7 {fill:url(#id2)}
+    .fil3 {fill:url(#id3)}
+    .fil5 {fill:url(#id4)}
+    .fil4 {fill:url(#id5)}
+    .fil0 {fill:url(#id6)}
+    .fil2 {fill:url(#id7)}
+    .fil11 {fill:white !important;fill-rule:nonzero}
+    .fil9 {fill:white !important;fill-rule:nonzero}
+    .fil10 {fill:white !important;fill-rule:nonzero}
+  ]]></style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="5196.77" y1="2217.91" x2="12484.35" y2="2217.91">
+   <stop offset="0" style="stop-opacity:1; stop-color:#46DAFE"/>
+   <stop offset="0.329412" style="stop-opacity:1; stop-color:#4D93FE"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#554CFF"/>
+  </linearGradient>
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="65.71" y1="9463.06" x2="3844.59" y2="9463.06">
+   <stop offset="0" style="stop-opacity:1; stop-color:#A400CC"/>
+   <stop offset="0.509804" style="stop-opacity:1; stop-color:#7D26E5"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#554CFF"/>
+  </linearGradient>
+  <linearGradient id="id2" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="4435.65" y1="5961.29" x2="39.7" y2="5961.29"/>
+  <linearGradient id="id3" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="9868.53" y1="12419.58" x2="2580.97" y2="12419.58"/>
+  <linearGradient id="id4" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="10660.41" y1="8587.53" x2="15056.34" y2="8587.53"/>
+  <linearGradient id="id5" gradientUnits="userSpaceOnUse" xlink:href="#id1" x1="15030.36" y1="5068.29" x2="11251.47" y2="5068.29"/>
+  <linearGradient id="id6" gradientUnits="userSpaceOnUse" xlink:href="#id1" x1="1982.74" y1="1920.92" x2="7460.85" y2="1920.92"/>
+  <linearGradient id="id7" gradientUnits="userSpaceOnUse" xlink:href="#id1" x1="12411.18" y1="12636.31" x2="6933.06" y2="12636.31"/>
+  <linearGradient id="id8" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="41833.63" y1="7335.41" x2="43426.16" y2="7335.41"/>
+  <linearGradient id="id9" gradientUnits="userSpaceOnUse" x1="36334.76" y1="13044.4" x2="55820.08" y2="3455.14">
+   <stop offset="0" style="stop-opacity:1; stop-color:#46DAFE"/>
+   <stop offset="0.439216" style="stop-opacity:1; stop-color:#4D93FE"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#554CFF"/>
+  </linearGradient>
+  <linearGradient id="id10" gradientUnits="userSpaceOnUse" x1="43449.93" y1="8634.69" x2="58707.54" y2="5815.59">
+   <stop offset="0" style="stop-opacity:1; stop-color:#4D96FE"/>
+   <stop offset="0.490196" style="stop-opacity:1; stop-color:#784BE5"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#A400CC"/>
+  </linearGradient>
+ </defs>
+ <g id="Capa_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_1964091578944">
+   <path class="fil0" d="M5033.96 38.59l-2381.74 1370.99c-289.28,178.04 -46.41,451.4 -46.41,451.4 785.17,1131.9 1735.31,1779.36 2590.97,2148.89 1701.72,227.27 2896.3,-1183.12 2934.41,-1228.68 -251.72,245.29 -558.8,225.94 -558.8,225.94 -428.79,24.7 -668.19,-356.84 -668.19,-356.84l-1533.23 -2572.82c-61.18,-59.68 -128.02,-77.47 -185.92,-77.47 -85.22,0 -151.09,38.59 -151.09,38.59zm3097.23 2742.6c0.31,-0.29 0.66,-0.65 1.02,-1.02l-0.12 -0.05c0,0 -0.31,0.36 -0.9,1.07z"/>
+   <path class="fil1" d="M9966.6 0.83l-1.11 0 -1.09 0c-151.47,0 -230.27,120.1 -230.27,120.1l-1504.43 2545.05c-30.89,43.28 -63.65,81.13 -97.49,114.19l-0.12 -0.05c0,0 -1205.71,1460.73 -2935.32,1229.75 1272.55,549.67 2335.83,484.57 2335.83,484.57 3467.12,-38.4 5006.84,-2756.25 5006.84,-2756.25 164.09,-245.11 -100.44,-382.99 -100.44,-382.99l-2399.58 -1344.98c-25.85,-6.36 -50.13,-9.2 -72.82,-9.39z"/>
+   <path class="fil2" d="M6934.06 11906.89c251.73,-245.29 558.8,-225.89 558.8,-225.89 428.86,-24.76 668.26,356.79 668.26,356.79l1533.23 2572.87c151.23,147.63 336.96,38.9 336.96,38.9l2381.73 -1371.01c289.35,-178.1 46.46,-451.38 46.46,-451.38 -785.22,-1131.97 -1735.36,-1779.37 -2591.02,-2148.96 -126.76,-16.95 -250.57,-24.76 -371.46,-24.76 -1501.73,0.05 -2527.72,1211.3 -2562.96,1253.43zm-1.02 1.02l0.12 0.12c0,0 0.31,-0.43 0.9,-1.14 -0.36,0.36 -0.66,0.66 -1.02,1.02z"/>
+   <path class="fil3" d="M7532.6 10193.64c-3467,38.47 -5006.79,2756.25 -5006.79,2756.25 -164.14,245.17 100.44,382.99 100.44,382.99l2399.58 1345.05c200.47,49.1 305.33,-110.78 305.33,-110.78l1504.38 -2544.98c30.91,-43.33 63.72,-81.2 97.49,-114.26l0.12 0.12c0,0 1205.73,-1460.8 2935.32,-1229.82 -1028.89,-444.41 -1921.03,-486.97 -2224.93,-486.97 -71.95,0 -110.95,2.4 -110.95,2.4z"/>
+   <path class="fil4" d="M13235.11 2352.76c-1131.97,785.17 -1779.42,1735.36 -2149.01,2590.97 -227.74,1705.62 1189.47,2901.72 1228.97,2934.72 -245.58,-251.73 -226.11,-559.04 -226.11,-559.04 -24.77,-428.86 356.72,-668.26 356.72,-668.26l2572.94 -1533.23c147.55,-151.23 38.81,-336.96 38.81,-336.96l-1370.94 -2381.68c-66.53,-108.07 -146.24,-141.91 -220.09,-141.91 -123.95,0.05 -231.29,95.38 -231.29,95.38zm-919.32 5526.4l0.12 -0.07c0,0 -0.29,-0.17 -0.83,-0.65 0.24,0.24 0.48,0.48 0.72,0.72z"/>
+   <path class="fil5" d="M10601.53 7279.61c38.45,3467.07 2756.32,5006.85 2756.32,5006.85 245.16,164.09 382.99,-100.44 382.99,-100.44l1345.03 -2399.53c49.17,-200.52 -110.83,-305.4 -110.83,-305.4l-2544.98 -1504.38c-43.34,-30.94 -81.15,-63.7 -114.27,-97.54l0.12 -0.07c0,0 -1460.8,-1205.71 -1229.8,-2935.37 -549.6,1272.55 -484.57,2335.88 -484.57,2335.88z"/>
+   <path class="fil6" d="M2780.12 6724.12c0,0 0.31,0.24 0.83,0.65 -0.24,-0.24 -0.48,-0.48 -0.72,-0.72l-0.12 0.07zm226.96 559.69c24.76,428.86 -356.72,668.26 -356.72,668.26l-2572.89 1533.23c-147.62,151.23 -38.88,336.96 -38.88,336.96l1371.01 2381.74c178.03,289.34 451.33,46.46 451.33,46.46 1132.02,-785.17 1779.42,-1735.36 2149.01,-2590.97 227.74,-1705.5 -1189.3,-2901.6 -1228.99,-2934.72 245.6,251.73 226.13,559.04 226.13,559.04z"/>
+   <path class="fil7" d="M1355.2 2417.2l-1345.05 2399.6c-49.15,200.45 110.85,305.33 110.85,305.33l2544.98 1504.37c43.33,30.96 81.13,63.72 114.26,97.56l-0.12 0.07c0,0 1460.8,1205.71 1229.82,2935.37 549.6,-1272.55 484.57,-2335.88 484.57,-2335.88 -38.47,-3467.07 -2756.32,-5006.79 -2756.32,-5006.79 -58.06,-38.9 -110.05,-53.69 -155.67,-53.69 -147.02,0 -227.32,154.06 -227.32,154.06z"/>
+  </g>
+  <g id="_1964091516880">
+   <path class="fil8" d="M22499.32 11118.88c2223.94,0 3840.24,-1573.63 3840.24,-3734.42 0,-2162.47 -1616.3,-3736.11 -3840.24,-3736.11 -2223.92,0 -3840.23,1573.64 -3840.23,3736.11 0,2160.8 1616.3,3734.42 3840.23,3734.42zm-2203.43 -3734.42c0,-1396.13 923.34,-2413.35 2203.43,-2413.35 1280.08,0 2203.44,1017.22 2203.44,2413.35 0,1394.44 -923.36,2413.38 -2203.44,2413.38 -1280.08,0 -2203.43,-1018.94 -2203.43,-2413.38z"/>
+   <path class="fil8" d="M28887.77 3817.33l-1616.32 0 0 7134.29 1616.32 0 0 -5246.61c1384.2,1500.26 2811.06,3379.41 2811.06,5246.61l1616.3 0 0 -7134.29 -1616.3 0 0 3336.73c-996.76,-1563.4 -2297.34,-2770.09 -2811.06,-3336.73z"/>
+   <path class="fil8" d="M36168.84 3817.33l-1616.3 0 0 7134.29 1616.3 0 0 -5246.61c1384.2,1500.26 2811.06,3379.41 2811.06,5246.61l1616.3 0 0 -7134.29 -1616.3 0 0 3336.73c-996.74,-1563.4 -2297.32,-2770.09 -2811.06,-3336.73z"/>
+   <path class="fil9" d="M41833.63 3817.33l0 7134.29 1616.3 0 0 -7134.29 -1616.3 0zm4903.55 0l-1814.3 3493.76c-1292.02,2486.75 -442.06,3810.68 860.22,3807.79 963.86,-2.15 1690.76,-474.02 2337.1,-713.08 364.08,-134.62 551.73,-110.42 459.37,-300.6l-506.58 -1071.61c-637.01,255 -1243.88,658.42 -1692.53,658.42 -756.1,0 -167.26,-1216.92 240.66,-2024.22l798.76 -1573.64 1343.22 2747.88 -2.49 0.34 1019.73 2109.24 1783.58 0 -3463.05 -7134.29 -1363.7 0z"/>
+  </g>
+  <path class="fil10" d="M46737.18 3817.33l-1814.3 3493.76c-1292.02,2486.75 -442.06,3810.68 860.22,3807.79 963.86,-2.15 1690.76,-474.02 2337.1,-713.08 364.08,-134.62 551.73,-110.42 459.37,-300.6l-506.58 -1071.61c-637.01,255 -1243.88,658.42 -1692.53,658.42 -756.1,0 -167.26,-1216.92 240.66,-2024.22l798.76 -1573.64 1343.22 2747.88 -2.49 0.34 1019.73 2109.24 1783.58 0c-1101.68,-2269.6 -2069.8,-4264.04 -3171.46,-6533.61 -113.35,-233.54 -251.02,-600.68 -571.57,-600.68l-1083.72 0z"/>
+  <polygon class="fil11" points="41833.63,3817.33 41833.63,10951.62 43449.93,10951.62 43449.93,3817.33 "/>
+ </g>
+</svg>
+       
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Características</a></li>
+        <li><a href="#test">Entorno de Test</a></li>
+      </ul>
+      <a href="#" class="btn btn-outline">Documentación</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Entorno de Pruebas de Chatbot Activo
+      </div>
+      <h1>Inteligencia Artificial Conversacional de <span class="text-gradient">Siguiente Generación</span></h1>
+      <p>Página de prueba para la integración del widget de Webchat de ONNIA. Interactúa con el asistente flotante en la esquina inferior derecha.</p>
+      <div class="hero-actions">
+        <a href="#test" class="btn btn-primary">Probar Interacción</a>
+      </div>
+    </header>
+
+    <!-- Features -->
+    <section id="features" class="features-grid">
+      <div class="card">
+        <div class="card-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+        </div>
+        <h3>Respuestas Ultrarrápidas</h3>
+        <p>Integración en tiempo real con modelos LLM optimizados para brindar atención inmediata sin latencia.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m0 0v2m0-2h2m-2 0H10m11 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <h3>Seguridad Avanzada</h3>
+        <p>Conexiones cifradas con tokens de validación dinámicos para proteger la información de tus clientes.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+        </div>
+        <h3>Widget Personalizable</h3>
+        <p>Adapta los colores, logos y flujos del chat para coincidir 100% con la identidad visual de tu marca.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Extended Content for Scroll Test -->
+  <section id="test" class="test-section">
+    <div class="container">
+      <div class="test-content">
+        <div class="test-text">
+          <h2>Validación de Experiencia de Usuario</h2>
+          <p>Prueba el widget de ONNIA haciendo scroll por la página para verificar la visibilidad, posición z-index y el rendimiento en navegadores móviles y de escritorio.</p>
+          <button class="btn btn-primary" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})">Hacer Scroll al Final ↓</button>
+        </div>
+        <div class="mock-chat-preview">
+          <div class="chat-header">
+            <div class="chat-status"></div>
+            <strong>Simulación del Chatbot</strong>
+          </div>
+          <div class="chat-msg bot">¡Hola! Soy el agente virtual de ONNIA. ¿En qué puedo ayudarte hoy?</div>
+          <div class="chat-msg user">Hola, quiero probar la integración en esta web.</div>
+          <div class="chat-msg bot">¡Perfecto! El widget de producción está activo en la esquina inferior derecha.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 ONNIA AI. Entorno de desarrollo y pruebas de Webchat.</p>
+    </footer>
+  </div>
+
+  <!-- Panel de Control Flotante para cambiar Token/Script -->
+  <div class="config-floating">
+    <button class="config-btn" onclick="toggleConfig()">
+      ⚙️ Configurar Widget Token
+    </button>
+    <div class="config-panel" id="configPanel">
+      <h4>Cambiar Token de Pruebas</h4>
+      <label style="font-size: 11px; color: var(--text-muted);">Token de ONNIA:</label>
+      <input type="text" id="tokenInput" placeholder="Pega solo el Token aquí..." />
+      
+      <label style="font-size: 11px; color: var(--text-muted);">O Script Completo:</label>
+      <textarea id="scriptInput" placeholder="<script src='...'></script>"></textarea>
+      
+      <button onclick="saveAndApplyWidget()">Guardar y Aplicar</button>
+    </div>
+  </div>
+
+  <!-- Carga del Script del Widget Dynamically con Fallback al Script Base -->
+  <script id="onnia-widget-script">
+    (function() {
+      // Token Base por defecto
+      const DEFAULT_TOKEN = "v1.W-2YuxR9A8npVNc9CIVDmw5ZFKvmUrtgURrKJiprPfdJjeXvV43ZT9sU1usiHNhzZipFxZJS2FzJ0p_7Y9cW8jKqPFMzvACylifM2VdAzFQmxrXSDZwgJu5a6LSJrzRt0y6tLWerdwUlZ6XSAO38u6tBjO-G_ImrKlw394invh35BMTO7CL2FZvxaAQsPRuBVFsuU810QmsvNZQYe03L1Wxhh8ZCThgaqIgmje4oFDGOStXbbZvInXTv605S6HUBq91mRs6-KuZVVTpCKKndIoZqjz0k5RZ3rfmLIjNmIUdxgmn3hmmBgncz7oiR-VDPFcY6RgHlqsTlSVCne3TBhLUgD4yfq6dsRCaR2ZFym0Or_NGrm-ocNjJWMe0B3kJrnuItc5P5tGVYtOYq5d5bifAFn4nlmom3rCSAlsaVw1khXdMKJyltQ9uvEKGN7MttJfHIf6OM19bCPBjknhdZ83gf3MwfEGB7DqrNHPTEnUIxr08xuC0OZNxDOdZTJeXDCL1olboJ4Z08o2n-iqc-6n13iA";
+      
+      // Cargar del localStorage si existe
+      const savedToken = localStorage.getItem('onnia_widget_token') || DEFAULT_TOKEN;
+      
+      // Setear valores en los inputs del panel
+      document.getElementById('tokenInput').value = savedToken;
+
+      // Inyectar el script
+      const script = document.createElement('script');
+      script.src = `https://widget.onnia.ai/onnia-widget.js?token=${savedToken}`;
+      document.body.appendChild(script);
+    })();
+
+    function toggleConfig() {
+      const panel = document.getElementById('configPanel');
+      panel.classList.toggle('open');
+    }
+
+    function saveAndApplyWidget() {
+      const tokenInput = document.getElementById('tokenInput').value.trim();
+      const scriptInput = document.getElementById('scriptInput').value.trim();
+      let tokenToSave = tokenInput;
+
+      // Si pegó una etiqueta <script>, extraer el token de la URL
+      if (scriptInput.includes('token=')) {
+        const match = scriptInput.match(/token=([^"'\s>]+)/);
+        if (match && match[1]) {
+          tokenToSave = match[1];
+        }
+      }
+
+      if (tokenToSave) {
+        localStorage.setItem('onnia_widget_token', tokenToSave);
+        location.reload(); // Recargar para limpiar la instancia anterior del widget
+      } else {
+        alert("Por favor ingresa un Token o Script válido.");
+      }
+    }
+  </script>
+</body>
+</html>
